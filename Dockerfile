@@ -2,6 +2,9 @@ FROM openjdk:8-jre-alpine
 
 MAINTAINER tacokit@talend.com
 
+LABEL name="Talend Component Kit Server Demo" \
+      version="0.0.2-SNAPSHOT"
+
 ENV LC_ALL en_US.UTF-8
 
 RUN set -xe && \
