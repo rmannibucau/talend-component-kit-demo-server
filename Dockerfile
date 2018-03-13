@@ -42,8 +42,10 @@ COPY bin/* $MEECROWAVE_BASE/bin/
 RUN chmod +x bin/*.sh
 
 RUN mkdir -p $M2_HOME/org/talend/components/servicenow/0.0.1-SNAPSHOT $M2_HOME/org/talend/components/widget/1.0.0-SNAPSHOT && \
-    wget https://oss.sonatype.org/service/local/artifact/maven/content?r=releases&g=org.talend.components&a=servicenow&v=0.0.1-SNAPSHOT&e=jar -O $M2_HOME/org/talend/components/servicenow/0.0.1-SNAPSHOT/servicenow-0.0.1-SNAPSHOT.jar && \
-    wget https://oss.sonatype.org/service/local/artifact/maven/content?r=releases&g=org.talend.components&a=widget&v=0.0.1-SNAPSHOT&e=jar -O $M2_HOME/org/talend/components/widget/1.0.0-SNAPSHOT/widget-1.0.0-SNAPSHOT.jar
+    for i in "" .asc; do wget https://oss.sonatype.org/service/local/artifact/maven/content?r=releases&g=org.talend.components&a=servicenow&v=0.0.1-SNAPSHOT&e=jar$i -O $M2_HOME/org/talend/components/servicenow/0.0.1-SNAPSHOT/servicenow-0.0.1-SNAPSHOT.jar$i; done && \
+    for i in "" .asc; do wget https://oss.sonatype.org/service/local/artifact/maven/content?r=releases&g=org.talend.components&a=widget&v=0.0.1-SNAPSHOT&e=jar$i -O $M2_HOME/org/talend/components/widget/1.0.0-SNAPSHOT/widget-1.0.0-SNAPSHOT.jar$i; done && \
+    gpg --batch --verify $M2_HOME/org/talend/components/servicenow/0.0.1-SNAPSHOT/servicenow-0.0.1-SNAPSHOT.jar.asc $M2_HOME/org/talend/components/servicenow/0.0.1-SNAPSHOT/servicenow-0.0.1-SNAPSHOT.jar && \
+    gpg --batch --verify $M2_HOME/org/talend/components/widget/1.0.0-SNAPSHOT/widget-1.0.0-SNAPSHOT.jar.asc $M2_HOME/org/talend/components/widget/1.0.0-SNAPSHOT/widget-1.0.0-SNAPSHOT.jar
 
 EXPOSE 8080
 CMD [ "./bin/meecrowave.sh", "run" ]
