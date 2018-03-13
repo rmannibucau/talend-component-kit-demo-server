@@ -2,7 +2,6 @@ FROM openjdk:8-jre-alpine
 
 MAINTAINER tacokit@talend.com
 
-
 LABEL io.k8s.display-name="Talend Component Kit Server Demo" \
       io.k8s.description="Simple Talend Component Kit instance." \
       name="Talend Component Kit Server Demo" \
